@@ -72,28 +72,28 @@ nsimu <- 100; phi <- 0.2; ncohort <- 12; cohortsize <- 3; init.level <- 1
 p.true <-c(0.01, 0.05, 0.10, 0.14, 0.20, 0.26, 0.34)
 add.args=list(alp.prior=phi, bet.prior=1-phi)
 ## get the operating characteristics for 100 simulations using the CFO design
-##CFO.oc (nsimu, design='CFO', phi, p.true, ncohort, init.level, cohortsize,
-##       tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args) 
+CFO.oc (nsimu, design='CFO', phi, p.true, ncohort, init.level, cohortsize,
+       tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args) 
 ## get the operating characteristics for 100 simulations using the aCFO design
-##CFO.oc (nsimu, design='aCFO', phi, p.true, ncohort, init.level, cohortsize,
-##       tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args)
+CFO.oc (nsimu, design='aCFO', phi, p.true, ncohort, init.level, cohortsize,
+       tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args)
 tau <- 3; accrual <- 6; tite.dist <- 2; accrual.dist <- 1
 ## get the operating characteristics for 100 simulations using the TITE-CFO design
-##CFO.oc (nsimu, design='TITE-CFO', phi, p.true, ncohort, init.level, cohortsize,
-##        tau, accrual, tite.dist, accrual.dist, add.args) 
+CFO.oc (nsimu, design='TITE-CFO', phi, p.true, ncohort, init.level, cohortsize,
+        tau, accrual, tite.dist, accrual.dist, add.args) 
 ## get the operating characteristics for 100 simulations using the TITE-aCFO design
-##CFO.oc (nsimu, design='TITE-aCFO', phi, p.true, ncohort, init.level, cohortsize,
-##        tau, accrual, tite.dist, accrual.dist, add.args)
+CFO.oc (nsimu, design='TITE-aCFO', phi, p.true, ncohort, init.level, cohortsize,
+        tau, accrual, tite.dist, accrual.dist, add.args)
 ## get the operating characteristics for 100 simulations using the fCFO design
-##CFO.oc (nsimu, design='fCFO', phi, p.true, ncohort, init.level, cohortsize,
-##        tau, accrual, tite.dist, accrual.dist, add.args) 
+CFO.oc (nsimu, design='fCFO', phi, p.true, ncohort, init.level, cohortsize,
+        tau, accrual, tite.dist, accrual.dist, add.args) 
 ## get the operating characteristics for 100 simulations using the f-aCFO design
-##CFO.oc (nsimu, design='f-aCFO', phi, p.true, ncohort, init.level, cohortsize,
-##        tau, accrual, tite.dist, accrual.dist, add.args)
+CFO.oc (nsimu, design='f-aCFO', phi, p.true, ncohort, init.level, cohortsize,
+        tau, accrual, tite.dist, accrual.dist, add.args)
 ## get the operating characteristics for 100 simulations using the bCFO design
-##CFO.oc (nsimu, design='bCFO', phi, p.true, ncohort, init.level, cohortsize,
-##        tau, accrual, tite.dist, accrual.dist, add.args) 
+CFO.oc (nsimu, design='bCFO', phi, p.true, ncohort, init.level, cohortsize,
+        tau, accrual, tite.dist, accrual.dist, add.args) 
 ## get the operating characteristics for 100 simulations using the b-aCFO design
-##CFO.oc (nsimu, design='b-aCFO', phi, p.true, ncohort, init.level, cohortsize,
-##        tau, accrual, tite.dist, accrual.dist, add.args) 
+CFO.oc (nsimu, design='b-aCFO', phi, p.true, ncohort, init.level, cohortsize,
+        tau, accrual, tite.dist, accrual.dist, add.args) 
 }
