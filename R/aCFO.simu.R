@@ -29,9 +29,10 @@
 #'
 #' @return The \code{aCFO.simu} function returns a list object comprising the following components: the target DLT 
 #'         rate ($target), the actual DLT rates under different dose levels ($p.true), the selected MTD ($MTD), 
-#'         the total number of DLTs and patients for all dose levels ($DLT.ns and $dose.ns), and the over-toxicity status 
-#'         for all dose levels ($over.doses). Specifically, the value of 1 represents over-toxicity at that dose level, 
-#'         while the value of 0 indicates safety at that dose level.
+#'         the list that includes the dose level assigned to each cohort($dose.list), the total number of DLTs and 
+#'         patients for all dose levels ($DLT.ns and $dose.ns), and the over-toxicity status for all dose levels 
+#'         ($over.doses). Specifically, the value of 1 represents over-toxicity at that dose level, while the value 
+#'         of 0 indicates safety at that dose level.
 #' 
 #' @author Jialu Fang
 #' 
@@ -80,6 +81,7 @@ aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
 
   earlystop <- 0
   ndose <- length(p.true)
+  doselist <- rep(0, ncohort)
   curDose <- init.level
   
   tys <- rep(0, ndose) # number of responses for different doses.
@@ -87,7 +89,8 @@ aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
   tover.doses <- rep(0, ndose) # Whether each dose is overdosed or not, 1 yes
   
   for (i in 1:ncohort){
-    pc <- p.true[curDose] 
+    pc <- p.true[curDose]
+    doselist[i] <- curDose
     
     # sample from current dose
     cres <- rbinom(cohortsize, 1, pc)
@@ -135,6 +138,9 @@ aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
   }else{
     MTD <- 99
   }
-  list(target=phi, p.true=p.true, MTD=MTD, dose.ns=tns, DLT.ns=tys, tover.doses=tover.doses)
+  out<-list(target=phi, p.true=p.true, MTD=MTD, dose.list=doselist, dose.ns=tns,
+            DLT.ns=tys, tover.doses=tover.doses)
+  class(out) <- "cfo"
+  return(out)
 }
 

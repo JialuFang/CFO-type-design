@@ -219,12 +219,18 @@ CFO.oc <- function(nsimu=5000, design, phi, p.true, ncohort, init.level, cohorts
   numTrials <- length(results_nopara)
   ndose <- length(results_nopara[[1]]$dose.ns)
   Perc <- rep(0, ndose)
+  nPatients <- rep(0, ndose)
+  nTox <- rep(0, ndose)
+  tol.Subjs <- 0
   nonErrStops <- 0
   for (res in results_nopara){
     if (res$MTD != 99){
       nonErrStops <- nonErrStops + 1
       Perc[res$MTD] <- 1 + Perc[res$MTD]
     }
+    nPatients <- nPatients + res$dose.ns
+    nTox <- res$DLT.ns + nTox
+    tol.Subjs <- tol.Subjs + sum(res$dose.ns)
   }
   Perc <- Perc/numTrials
   errStop <- numTrials-nonErrStops
@@ -232,18 +238,20 @@ CFO.oc <- function(nsimu=5000, design, phi, p.true, ncohort, init.level, cohorts
   sy <- post.process(results)
   
   if (is.na(impute.method)){
-    res <- list(selPercent=Perc, p.true = p.true, errStop=errStop,
+    out <- list(selPercent=Perc, nPatients=nPatients, nTox=nTox,
+                p.true = p.true, errStop=errStop, tol.Subjs=tol.Subjs,
                 simu.oc = data.frame(MTDSel=sy$MTD.Sel, MTDAllo=sy$MTD.Allo, 
                                      overSel=sy$Over.Sel, overAllo=sy$Over.Allo, averDLT=sy$PerDLT),
                 simu.setup = data.frame(target = phi,ncohort = ncohort, 
                                         cohortsize = cohortsize, design = design, nsimu = nsimu))
-    return(res)
   }else{
-    res <- list(selPercent=Perc, p.true = p.true, errStop=errStop,
+    out <- list(selPercent=Perc, nPatients=nPatients, nTox=nTox,
+                p.true = p.true, errStop=errStop, tol.Subjs=tol.Subjs,
                 simu.oc = data.frame(MTDSel=sy$MTD.Sel, MTDAllo=sy$MTD.Allo, overSel=sy$Over.Sel,
                                      overAllo=sy$Over.Allo, averDLT=sy$PerDLT, averDur = sy$Duration),
                 simu.setup = data.frame(target = phi, ncohort = ncohort, 
                                         cohortsize = cohortsize, design = design, nsimu = nsimu))
-    return(res)
   }
+  class(out) <- "cfo"
+  return(out)
 }

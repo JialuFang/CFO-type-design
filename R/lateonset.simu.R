@@ -34,9 +34,9 @@
 #'          \code{CFO.oc()} function.
 #'
 #' @return The \code{lateonset.simu()} function returns a list object comprising the following components: the target DLT 
-#'         rate ($target), the actual DLT rates under different dose levels ($p.true), the selected MTD ($MTD), 
-#'         the total number of DLTs and patients for all dose levels ($DLT.ns and $dose.ns), and the duration of the 
-#'         trial in months ($total.time).
+#'         rate ($target), the actual DLT rates under different dose levels ($p.true), the selected MTD ($MTD),
+#'         the list that includes the dose level assigned to each cohort($dose.list), the total number of DLTs and 
+#'         patients for all dose levels ($DLT.ns and $dose.ns), and the duration of the trial in months ($total.time).
 #'         
 #' @author Jialu Fang
 #' 
@@ -151,6 +151,8 @@ lateonset.simu <- function(phi, p.true, tau, cohortsize, ncohort, accrual, tite.
   }else if (design == 'b-aCFO'){accumulation = TRUE; impute.method = "No"}
   
   ndose <- length(p.true)
+  doselist <- rep(0, ncohort)
+  
   if (is.null(add.args$alp.prior)){
     add.args <- c(add.args, list(alp.prior=phi, bet.prior=1-phi))
   }
@@ -166,7 +168,8 @@ lateonset.simu <- function(phi, p.true, tau, cohortsize, ncohort, accrual, tite.
   tover.doses <- rep(0, ndose)
   
   for (i in 1:ncohort){
-    curP <- p.true[curDose]    
+    curP <- p.true[curDose]
+    doselist[i] <- curDose
     
     if (accrual.dist==0){
       delta.times <- rep(0, cohortsize)
@@ -231,6 +234,8 @@ lateonset.simu <- function(phi, p.true, tau, cohortsize, ncohort, accrual, tite.
   }else{
     MTD <- 99
   }
-  res <- list(MTD=MTD, dose.ns=tns, DLT.ns=tys, p.true=p.true, target=phi, total.time=assess.t[length(assess.t)])
-  res
+  out <- list(MTD=MTD, dose.list=doselist, dose.ns=tns, DLT.ns=tys, p.true=p.true, 
+              target=phi, total.time=assess.t[length(assess.t)])
+  class(out) <- "cfo"
+  return(out)
 }

@@ -251,6 +251,5 @@ CFO.next <- function(phi, cys, cns, cover.doses=c(0,0,0), curDose,
   }
   curDose <- curDose+index
   out <- list(target=phi, cys=cys, cns=cns, decision=decision, curDose = curDose)
-  class(out) <- "CFO"
   return(out)
 }

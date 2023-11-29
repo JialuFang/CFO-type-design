@@ -41,8 +41,8 @@ any dose level. This prior distribution is specified as Beta( \code{alpha.prior}
 \value{
 The \code{lateonset.simu()} function returns a list object comprising the following components: the target DLT
 rate ($target), the actual DLT rates under different dose levels ($p.true), the selected MTD ($MTD),
-the total number of DLTs and patients for all dose levels ($DLT.ns and $dose.ns), and the duration of the
-trial in months ($total.time).
+the list that includes the dose level assigned to each cohort($dose.list), the total number of DLTs and
+patients for all dose levels ($DLT.ns and $dose.ns), and the duration of the trial in months ($total.time).
 }
 \description{
 Use this function to find the maximum tolerated dose (MTD) for the CFO-type and aCFO-type designs with late-onset toxicities,

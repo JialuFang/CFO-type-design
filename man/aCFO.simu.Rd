@@ -28,9 +28,10 @@ aCFO design.}
 \value{
 The \code{aCFO.simu} function returns a list object comprising the following components: the target DLT
 rate ($target), the actual DLT rates under different dose levels ($p.true), the selected MTD ($MTD),
-the total number of DLTs and patients for all dose levels ($DLT.ns and $dose.ns), and the over-toxicity status
-for all dose levels ($over.doses). Specifically, the value of 1 represents over-toxicity at that dose level,
-while the value of 0 indicates safety at that dose level.
+the list that includes the dose level assigned to each cohort($dose.list), the total number of DLTs and
+patients for all dose levels ($DLT.ns and $dose.ns), and the over-toxicity status for all dose levels
+($over.doses). Specifically, the value of 1 represents over-toxicity at that dose level, while the value
+of 0 indicates safety at that dose level.
 }
 \description{
 Use this function to find the maximum tolerated dose (MTD) for a single Calibration-Free Odds (CFO) or accumulative CFO (aCFO) trial.

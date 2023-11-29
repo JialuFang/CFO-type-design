@@ -299,7 +299,6 @@ aCFO.next <- function(phi, tys, tns, tover.doses=c(), curDose, add.args=list(alp
   
   curDose <- curDose+index
   out <- list(target=phi, tys=tys, tns=tns, decision=decision, curDose = curDose)
-  class(out) <- "aCFO"
   return(out)
 }
 
