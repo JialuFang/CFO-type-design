@@ -1,11 +1,11 @@
 Package: CFO
-Title: What the Package Does (One Line, Title Case)
+Title: Calibration-free odds type (CFO-type) desgin and accumulative CFO type (aCF-type) design in phase I clinical trials.
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("Jialu", "Fang",  "u3008682@connect.hku.hk", role = c("aut", "cre"),
+           comment = c(ORCID = 0009-0007-9183-8034))
 Imports: BOIN,survival,dplyr
-Description: What the package does (one paragraph).
+Description: In the context of phase I clinical trials, the primary objective is to ascertain the maximum tolerated dose (MTD) corresponding to a specified target toxicity rate. The 'CFO' package facilitates the implementation of dose-finding trials through the utilization of CFO-type and aCFO-type designs. Specifically, it encompasses the calibration-free odds (CFO) design (Jin and Yin (2022) <doi:10.1177/09622802221079353>), Time-to-Event CFO (TITE-CFO) (Jin and Yin (2023) <doi:10.1002/pst.2304>), fractional CFO (fCFO), accumulative CFO (aCFO), TITE-aCFO, and f-aCFO designs.The functionalities embedded in the 'CFO' package include the determination of the dose for the subsequent cohort, the selection of the maximum tolerated dose (MTD) for a single trial, and the execution of multiple simulations to obtain operating characteristics. These capabilities permit the customization of design parameters, such as sample size, cohort sizes, and target dose limiting toxicity (DLT) rates.Moreover, as a precautionary measure, these functions are equipped with an overdose control rule to address safety considerations.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
