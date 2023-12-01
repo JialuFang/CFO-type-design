@@ -41,7 +41,7 @@
 #'                       tau, accrual, tite.dist, accrual.dist, add.args)
 #' summary(faCFOsimu)
 #' 
-summary.boin<- function (object, ...)
+summary.cfo<- function (object, ...)
 {
   if (!is.null(object$simu.oc)) {
     if (object$errStop == 0){
