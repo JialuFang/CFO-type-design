@@ -45,15 +45,17 @@ any dose level. This prior distribution is specified as Beta( \code{alpha.prior}
 }
 \value{
 the \code{ CFO.oc() } function returns basic setup of ($simu.setup and $p.true) and the operating
-characteristics ($selPercent and $simu.oc) of the design. \cr
+characteristics ($selPercent,$nTox,$nPatients and $simu.oc) of the design. \cr
 The operating characteristics includes \cr
 (1) selection percentage at each dose level ($selPercent) \cr
-(2) percentage of correct selection of the MTD ($simu.oc$MTDSel) \cr
-(3)percentage of patients allocated to the MTD ($simu.oc$MTDAllo) \cr
-(4)percentage of selecting a dose above the MTD ($simu.oc$overSel) \cr
-(5)percentage of allocating patients at dose levels above the MTD ($simu.oc$overAllo) \cr
-(6)percentage of the patients suffering DLT ($simu.oc$averDLT) \cr
-(7) Average trial duration if trials with late-onset toxicities ($simu.oc$averDur)
+(2) number of toxicity observed at each dose level ($nTox) \cr
+(3) number of patients treated at each dose level ($nPatients) \cr
+(4) percentage of correct selection of the MTD ($simu.oc$MTDSel) \cr
+(5) percentage of patients allocated to the MTD ($simu.oc$MTDAllo) \cr
+(6) percentage of selecting a dose above the MTD ($simu.oc$overSel) \cr
+(7) percentage of allocating patients at dose levels above the MTD ($simu.oc$overAllo) \cr
+(8) percentage of the patients suffering DLT ($simu.oc$averDLT) \cr
+(9) Average trial duration if trials with late-onset toxicities ($simu.oc$averDur)
 }
 \description{
 Obtain the operating characteristics of the CFO-type and aCFO-type designs for multiple simulations.
@@ -68,16 +70,18 @@ Additionally, in the example, we set \code{nsimu=100} for testing time considera
 is typically set to 5000 to ensure the accuracy of the results.
 }
 \examples{
+## setting
 nsimu <- 100; phi <- 0.2; ncohort <- 12; cohortsize <- 3; init.level <- 1
 p.true <-c(0.01, 0.05, 0.10, 0.14, 0.20, 0.26, 0.34)
 add.args=list(alp.prior=phi, bet.prior=1-phi)
+tau <- 3; accrual <- 6; tite.dist <- 2; accrual.dist <- 1
+
 ## get the operating characteristics for 100 simulations using the CFO design
 CFO.oc (nsimu, design='CFO', phi, p.true, ncohort, init.level, cohortsize,
        tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args) 
 ## get the operating characteristics for 100 simulations using the aCFO design
 CFO.oc (nsimu, design='aCFO', phi, p.true, ncohort, init.level, cohortsize,
        tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args)
-tau <- 3; accrual <- 6; tite.dist <- 2; accrual.dist <- 1
 ## get the operating characteristics for 100 simulations using the TITE-CFO design
 CFO.oc (nsimu, design='TITE-CFO', phi, p.true, ncohort, init.level, cohortsize,
         tau, accrual, tite.dist, accrual.dist, add.args) 

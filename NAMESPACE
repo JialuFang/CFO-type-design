@@ -3,6 +3,7 @@
 S3method(plot,cfo)
 export(CFO.next)
 export(CFO.oc)
+export(CFO2d.next)
 export(aCFO.next)
 export(aCFO.simu)
 export(lateonset.next)

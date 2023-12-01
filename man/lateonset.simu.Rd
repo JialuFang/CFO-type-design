@@ -5,7 +5,7 @@
 \title{Find the maximum tolerated dose (MTD) for a single trial using the CFO-type and aCFO-type designs with late-onset toxicities.}
 \usage{
 lateonset.simu(phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-       design, init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
+       design, init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi), seed=NULL)
 }
 \arguments{
 \item{phi}{the target DLT rate.}
@@ -37,6 +37,8 @@ b-aCFO. Specifically, bCFO refers to the benchmark CFO, and b-aCFO denotes the b
 \item{add.args}{additional parameters, usually set as list(alp.prior=phi, bet.prior=1-phi) by default. \code{alp.prior}
 and \code{bet.prior} represent the parameters of the prior distribution for the true DLT rate at
 any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).}
+
+\item{seed}{an integer to set as the seed of the random number generator for reproducible results, the default is set to NULL.}
 }
 \value{
 The \code{lateonset.simu()} function returns a list object comprising the following components: the target DLT

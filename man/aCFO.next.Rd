@@ -5,7 +5,7 @@
 \title{Determination of the dose level for next cohort in aCFO design}
 \usage{
 aCFO.next(phi, tys, tns, tover.doses=c(), curDose, 
-       add.args=list(alp.prior=phi, bet.prior=1-phi))
+       add.args=list(alp.prior=phi, bet.prior=1-phi), seed=NULL)
 }
 \arguments{
 \item{phi}{the target DLT rate.}
@@ -24,6 +24,8 @@ for each dose level.}
 \item{add.args}{additional parameters, usually set as list(alp.prior=phi, bet.prior=1-phi) by default. \code{alp.prior}
 and \code{bet.prior} represent the parameters of the prior distribution for the true DLT rate at
 any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).}
+
+\item{seed}{an integer to set as the seed of the random number generator for reproducible results.}
 }
 \value{
 The \code{aCFO.next()} function returns a list object comprising the following elements: the target DLT

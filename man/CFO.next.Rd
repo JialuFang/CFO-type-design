@@ -5,7 +5,7 @@
 \title{Determination of the dose level for next cohort}
 \usage{
 CFO.next(phi, cys, cns, cover.doses=c(0,0,0), curDose,
-       add.args=list(alp.prior=phi,bet.prior=1-phi))
+       add.args=list(alp.prior=phi,bet.prior=1-phi), seed=NULL)
 }
 \arguments{
 \item{phi}{the target DLT rate}
@@ -18,6 +18,8 @@ CFO.next(phi, cys, cns, cover.doses=c(0,0,0), curDose,
 The value is set as 1 if the dose level is overly toxicity; otherwise, it is set to 0.}
 
 \item{curDose}{the current dose level.}
+
+\item{seed}{an integer to set as the seed of the random number generator for reproducible results.}
 
 \item{alp.prior, bet.prior}{the parameters of the prior distribution for the true DLT rate at any dose level.
 This prior distribution is set to Beta( \code{alpha.prior}, \code{beta.prior}).

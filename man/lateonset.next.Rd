@@ -6,7 +6,7 @@
 \usage{
 lateonset.next(curDose, phi, tau, impute.method, enter.times, dlt.times,
        current.t, accumulation, doses, tover.doses=c(), simu=FALSE,
-       add.args=list(alp.prior=phi, bet.prior=1-phi))
+       add.args=list(alp.prior=phi, bet.prior=1-phi), seed=NULL)
 }
 \arguments{
 \item{curDose}{the current dose level.}
@@ -42,6 +42,8 @@ for each dose level.}
 \item{add.args}{additional parameters, usually set as list(alp.prior=phi, bet.prior=1-phi) by default. \code{alp.prior}
 and \code{bet.prior} represent the parameters of the prior distribution for the true DLT rate at
 any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).}
+
+\item{seed}{an integer to set as the seed of the random number generator for reproducible results.}
 }
 \value{
 The \code{lateonset.next()} function returns the recommended dose level for treating the next cohort of

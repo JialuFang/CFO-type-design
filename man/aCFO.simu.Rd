@@ -5,7 +5,7 @@
 \title{Find the maximum tolerated dose (MTD) for a single Calibration-Free Odds (CFO) or accumulative CFO (aCFO) trial.}
 \usage{
 aCFO.simu(phi, p.true, ncohort, init.level=1, cohortsize=3, 
-       add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE)
+       add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE, seed=NULL)
 }
 \arguments{
 \item{phi}{the target DLT rate.}
@@ -24,6 +24,8 @@ any dose level. This prior distribution is specified as Beta( \code{alpha.prior}
 
 \item{accumulation}{set \code{accumulation=FALSE} to conduct the CFO design; set \code{accumulation=TRUE} to conduct the
 aCFO design.}
+
+\item{seed}{an integer to set as the seed of the random number generator for reproducible results, the default is set to NULL.}
 }
 \value{
 The \code{aCFO.simu} function returns a list object comprising the following components: the target DLT
