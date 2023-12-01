@@ -4,7 +4,7 @@
 #' In aCFO design, use the function to determine the dose movement based on the toxicity outcomes of the enrolled cohorts.
 #'
 #' @usage aCFO.next(phi, tys, tns, tover.doses=c(), curDose, 
-#'        add.args=list(alp.prior=phi, bet.prior=1-phi))
+#'        add.args=list(alp.prior=phi, bet.prior=1-phi), seed=NULL)
 #'
 #' @param phi the target DLT rate.
 #' @param tys the current number of DLTs observed in patients for all dose levels.
@@ -17,6 +17,7 @@
 #' @param add.args additional parameters, usually set as list(alp.prior=phi, bet.prior=1-phi) by default. \code{alp.prior} 
 #'                 and \code{bet.prior} represent the parameters of the prior distribution for the true DLT rate at 
 #'                 any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).
+#' @param seed an integer to set as the seed of the random number generator for reproducible results.
 #'
 #' @details The aCFO design design incorporate the dose information of all positions (from the lowest to the 
 #'          highest dose levels) into the trial decision-making. Prior to assigning dose levels for new patient 
@@ -55,7 +56,8 @@
 #' 
 #' @import stats
 #' @export
-aCFO.next <- function(phi, tys, tns, tover.doses=c(), curDose, add.args=list(alp.prior=phi, bet.prior=1-phi)){
+aCFO.next <- function(phi, tys, tns, tover.doses=c(), curDose, 
+                      add.args=list(alp.prior=phi, bet.prior=1-phi), seed=NULL){
   
 ###############################################################################
 ###############define the functions used for main function#####################
@@ -222,6 +224,7 @@ aCFO.next <- function(phi, tys, tns, tover.doses=c(), curDose, add.args=list(alp
   ############################MAIN DUNCTION######################################
   ###############################################################################
   ndose <- length(tys)
+  set.seed(seed)
   if (is.null(tover.doses)){
     tover.doses <- rep(0,ndose)
     warning("tover.doses is set to NaN and is assigned default values of ", 
@@ -299,6 +302,7 @@ aCFO.next <- function(phi, tys, tns, tover.doses=c(), curDose, add.args=list(alp
   
   curDose <- curDose+index
   out <- list(target=phi, tys=tys, tns=tns, decision=decision, curDose = curDose)
+  class(out) <- "cfo"
   return(out)
 }
 

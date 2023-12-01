@@ -4,7 +4,7 @@
 #' Use the function to determine the dose movement based on the toxicity outcomes of the enrolled cohorts.
 #'
 #' @usage CFO.next(phi, cys, cns, cover.doses=c(0,0,0), curDose,
-#'        add.args=list(alp.prior=phi,bet.prior=1-phi))
+#'        add.args=list(alp.prior=phi,bet.prior=1-phi), seed=NULL)
 #'
 #' @param phi the target DLT rate
 #' @param cys the current number of DLTs observed in patients for the left, current, and right dose levels.
@@ -15,6 +15,7 @@
 #' @param curDose the current dose level.
 #' @param cover.doses whether the dose level (left, current and right) is over-toxic or not. 
 #'                    The value is set as 1 if the dose level is overly toxicity; otherwise, it is set to 0.
+#' @param seed an integer to set as the seed of the random number generator for reproducible results.
 #'
 #' @details The CFO design determines the dose level for the next cohort by assessing evidence from the current 
 #'          dose level and its adjacent levels. This evaluation is based on odds ratios denoted as \eqn{O_k}, where 
@@ -51,7 +52,7 @@
 #' @import stats
 #' @export
 CFO.next <- function(phi, cys, cns, cover.doses=c(0,0,0), curDose,
-                     add.args=list(alp.prior=phi, bet.prior=1-phi)){
+                     add.args=list(alp.prior=phi, bet.prior=1-phi), seed=NULL){
   ###############################################################################
   ###############define the functions used for main function#####################
   ###############################################################################
@@ -198,6 +199,7 @@ CFO.next <- function(phi, cys, cns, cover.doses=c(0,0,0), curDose,
   }
   alp.prior <- add.args$alp.prior
   bet.prior <- add.args$bet.prior
+  set.seed(seed)
   
   if (cover.doses[2] == 1){
     index <- -1
@@ -251,5 +253,6 @@ CFO.next <- function(phi, cys, cns, cover.doses=c(0,0,0), curDose,
   }
   curDose <- curDose+index
   out <- list(target=phi, cys=cys, cns=cns, decision=decision, curDose = curDose)
+  class(out) <- "cfo"
   return(out)
 }

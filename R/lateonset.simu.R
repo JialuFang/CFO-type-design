@@ -5,7 +5,7 @@
 #' the f-aCFO design and benchmark aCFO design.
 #'
 #' @usage lateonset.simu(phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-#'        design, init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
+#'        design, init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi), seed=NULL)
 #'
 #' @param phi the target DLT rate.
 #' @param p.true the true DLT rates under the different dose levels.
@@ -26,6 +26,7 @@
 #' @param add.args additional parameters, usually set as list(alp.prior=phi, bet.prior=1-phi) by default. \code{alp.prior} 
 #'                 and \code{bet.prior} represent the parameters of the prior distribution for the true DLT rate at 
 #'                 any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).
+#' @param seed an integer to set as the seed of the random number generator for reproducible results, the default is set to NULL.
 #' @details The \code{lateonset.simu()} function is developed for determining the MTD in a single trial using CFO-type and 
 #'          aCFO-type designs with late-onset toxicities. Specifically, it includes the TITE-CFO design, fCFO design, benchmark 
 #'          CFO design, TITE-aCFO design, and f-aCFO design. The \code{design} parameter allows for selecting different designs. 
@@ -71,7 +72,7 @@
 #' lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
 #'                 design='b-aCFO', init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
 lateonset.simu <- function(phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-                    design, init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi)){
+                    design, init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi), seed=NULL){
   
   ###############################################################################
   ###############define the functions used for main function#####################
@@ -150,6 +151,7 @@ lateonset.simu <- function(phi, p.true, tau, cohortsize, ncohort, accrual, tite.
   }else if (design == 'f-aCFO'){accumulation = TRUE; impute.method = "frac"
   }else if (design == 'b-aCFO'){accumulation = TRUE; impute.method = "No"}
   
+  set.seed(seed)
   ndose <- length(p.true)
   doselist <- rep(0, ncohort)
   

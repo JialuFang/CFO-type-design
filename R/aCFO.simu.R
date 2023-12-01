@@ -3,7 +3,7 @@
 #' Use this function to find the maximum tolerated dose (MTD) for a single Calibration-Free Odds (CFO) or accumulative CFO (aCFO) trial.
 #'
 #' @usage aCFO.simu(phi, p.true, ncohort, init.level=1, cohortsize=3, 
-#'        add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE)
+#'        add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE, seed=NULL)
 #'
 #' @param phi the target DLT rate.
 #' @param p.true the true DLT rates under the different dose levels.
@@ -15,6 +15,7 @@
 #' @param add.args additional parameters, usually set as list(alp.prior=phi, bet.prior=1-phi) by default. \code{alp.prior} 
 #'                 and \code{bet.prior} represent the parameters of the prior distribution for the true DLT rate at 
 #'                 any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).
+#' @param seed an integer to set as the seed of the random number generator for reproducible results, the default is set to NULL.
 #'                            
 #' @details The \code{aCFO.simu()} function is designed to determine the Maximum Tolerated Dose (MTD) for a single CFO or aCFO 
 #'          trial. If \code{accumulation = FALSE}, this trial corresponds to the CFO design. If \code{accumulation = TRUE}, it
@@ -51,7 +52,7 @@
 #' @import BOIN
 #' @export
 aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
-                      add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE){
+                      add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE, seed=NULL){
   ###############################################################################
   ###############define the functions used for main function#####################
   ###############################################################################
@@ -78,7 +79,7 @@ aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
   ###############################################################################
   ############################MAIN DUNCTION######################################
   ###############################################################################
-
+  set.seed(seed)
   earlystop <- 0
   ndose <- length(p.true)
   doselist <- rep(0, ncohort)

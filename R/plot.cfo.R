@@ -9,6 +9,10 @@
 #' @param name the name of the object to be plotted.
 #'             User doesn't need to input this parameter.
 #'
+#' @details \code{plot()} returns a figure or a series of figures depending on the object entered.
+#'           Additionally, in the example, we set \code{nsimu=100} for testing time considerations. 
+#'           In reality, \code{nsimu} is typically set to 5000 to ensure the accuracy of the results.
+#'
 #' @return \code{plot()} returns a figure or a series of figures depending on the object entered
 #' 
 #' @author Jialu Fang
@@ -64,7 +68,7 @@
 #' faCFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, 
 #'                 accrual.dist, design='f-aCFO', init.level, add.args)
 #' plot(faCFOtrial)
-#' fCFOsimu <- CFO.oc (nsimu, design='f-aCFO', phi, p.true, ncohort, init.level, cohortsize,
+#' faCFOsimu <- CFO.oc (nsimu, design='f-aCFO', phi, p.true, ncohort, init.level, cohortsize,
 #'                       tau, accrual, tite.dist, accrual.dist, add.args)
 #' plot(faCFOsimu)
 plot.cfo<- function (x,..., name = deparse(substitute(x)))
