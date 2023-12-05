@@ -34,8 +34,8 @@ decision <- CFO.next(phi=0.2, cys=c(0,1,0), cns=c(3,6,0), cover.doses=c(0,0,0),
                      curDose=3, add.args)
 summary(decision)
 
-## summarize the object returned by aCFO.simu()
-aCFOtrial <- aCFO.simu(phi, p.true, ncohort, init.level, cohortsize=3,add.args, 
+## summarize the object returned by CFO.simu()
+aCFOtrial <- CFO.simu(phi, p.true, ncohort, init.level, cohortsize=3,add.args, 
                     accumulation = TRUE)
 summary(aCFOtrial)
 

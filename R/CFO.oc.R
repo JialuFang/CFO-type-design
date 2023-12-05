@@ -61,28 +61,28 @@
 #' 
 #' ## get the operating characteristics for 100 simulations using the CFO design
 #' CFO.oc (nsimu, design='CFO', phi, p.true, ncohort, init.level, cohortsize,
-#'        tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args) 
+#'        tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args)
 #' ## get the operating characteristics for 100 simulations using the aCFO design
-#' CFO.oc (nsimu, design='aCFO', phi, p.true, ncohort, init.level, cohortsize,
+#'CFO.oc (nsimu, design='aCFO', phi, p.true, ncohort, init.level, cohortsize,
 #'        tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args)
 #' ## get the operating characteristics for 100 simulations using the TITE-CFO design
 #' CFO.oc (nsimu, design='TITE-CFO', phi, p.true, ncohort, init.level, cohortsize,
-#'         tau, accrual, tite.dist, accrual.dist, add.args) 
+#'         tau, accrual, tite.dist, accrual.dist, add.args)
 #' ## get the operating characteristics for 100 simulations using the TITE-aCFO design
 #' CFO.oc (nsimu, design='TITE-aCFO', phi, p.true, ncohort, init.level, cohortsize,
 #'         tau, accrual, tite.dist, accrual.dist, add.args)
 #' ## get the operating characteristics for 100 simulations using the fCFO design
 #' CFO.oc (nsimu, design='fCFO', phi, p.true, ncohort, init.level, cohortsize,
-#'         tau, accrual, tite.dist, accrual.dist, add.args) 
+#'         tau, accrual, tite.dist, accrual.dist, add.args)
 #' ## get the operating characteristics for 100 simulations using the f-aCFO design
 #' CFO.oc (nsimu, design='f-aCFO', phi, p.true, ncohort, init.level, cohortsize,
 #'         tau, accrual, tite.dist, accrual.dist, add.args)
 #' ## get the operating characteristics for 100 simulations using the bCFO design
 #' CFO.oc (nsimu, design='bCFO', phi, p.true, ncohort, init.level, cohortsize,
-#'         tau, accrual, tite.dist, accrual.dist, add.args) 
+#'         tau, accrual, tite.dist, accrual.dist, add.args)
 #' ## get the operating characteristics for 100 simulations using the b-aCFO design
 #' CFO.oc (nsimu, design='b-aCFO', phi, p.true, ncohort, init.level, cohortsize,
-#'         tau, accrual, tite.dist, accrual.dist, add.args) 
+#'         tau, accrual, tite.dist, accrual.dist, add.args)
 CFO.oc <- function(nsimu=5000, design, phi, p.true, ncohort, init.level, cohortsize,
                    tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, 
                    add.args=list(alp.prior=phi, bet.prior=1-phi)){
@@ -195,7 +195,7 @@ CFO.oc <- function(nsimu=5000, design, phi, p.true, ncohort, init.level, cohorts
   run.fn <- function(i){
     set.seed(seeds[i])
     if (is.na(impute.method)){
-      res <- aCFO.simu(phi, p.true, ncohort, init.level, cohortsize, add.args, accumulation)
+      res <- CFO.simu(phi, p.true, ncohort, init.level, cohortsize, add.args, accumulation)
     }else{
       res <- lateonset.simu(phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
                             design, init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))

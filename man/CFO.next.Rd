@@ -19,11 +19,11 @@ The value is set as 1 if the dose level is overly toxicity; otherwise, it is set
 
 \item{curDose}{the current dose level.}
 
-\item{seed}{an integer to set as the seed of the random number generator for reproducible results.}
+\item{add.args}{additional parameters, usually set as list(alp.prior=phi, bet.prior=1-phi) by default. \code{alp.prior}
+and \code{bet.prior} represent the parameters of the prior distribution for the true DLT rate at
+any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).}
 
-\item{alp.prior, bet.prior}{the parameters of the prior distribution for the true DLT rate at any dose level.
-This prior distribution is set to Beta( \code{alpha.prior}, \code{beta.prior}).
-The default value is \code{phi} and \code{1-phi}.}
+\item{seed}{an integer to set as the seed of the random number generator for reproducible results.}
 }
 \value{
 The \code{CFO.next()} function returns a list object comprising the following elements: the target DLT

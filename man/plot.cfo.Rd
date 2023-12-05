@@ -33,13 +33,13 @@ nsimu <- 100; phi <- 0.2; ncohort <- 12; cohortsize <- 3; init.level <- 1
 p.true <-c(0.01, 0.05, 0.10, 0.14, 0.20, 0.26, 0.34)
 add.args=list(alp.prior=phi, bet.prior=1-phi)
 ## CFO design
-CFOtrial <- aCFO.simu(phi, p.true, ncohort, init.level, cohortsize=3,add.args, accumulation = FALSE)
+CFOtrial <- CFO.simu(phi, p.true, ncohort, init.level, cohortsize=3,add.args, accumulation = FALSE)
 plot(CFOtrial)
 CFOsimu <- CFO.oc (nsimu, design='CFO', phi, p.true, ncohort, init.level, cohortsize,
                     tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args)
 plot(CFOsimu)
 ## aCFO design
-aCFOtrial <- aCFO.simu(phi, p.true, ncohort, init.level, cohortsize=3,add.args, 
+aCFOtrial <- CFO.simu(phi, p.true, ncohort, init.level, cohortsize=3,add.args,
                     accumulation = TRUE)
 plot(aCFOtrial)
 aCFOsimu <- CFO.oc (nsimu, design='aCFO', phi, p.true, ncohort, init.level, cohortsize,
@@ -50,28 +50,28 @@ plot(aCFOsimu)
 ##############design with late-onset outcomes################
 tau <- 3; accrual <- 6; tite.dist <- 2; accrual.dist <- 1
 ## TITE-CFO design
-TITECFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, 
+TITECFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist,
                 accrual.dist, design='TITE-CFO', init.level, add.args)
 plot(TITECFOtrial)
 TITECFOsimu <- CFO.oc (nsimu, design='TITE-CFO', phi, p.true, ncohort, init.level, cohortsize,
                       tau, accrual, tite.dist, accrual.dist, add.args)
 plot(TITECFOsimu)
 ## TITE-aCFO design
-TITEaCFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, 
+TITEaCFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist,
                  accrual.dist,design='TITE-aCFO', init.level, add.args)
 plot(TITEaCFOtrial)
 TITEaCFOsimu <- CFO.oc (nsimu, design='TITE-aCFO', phi, p.true, ncohort, init.level, cohortsize,
                       tau, accrual, tite.dist, accrual.dist, add.args)
 plot(TITEaCFOsimu)
 ## fCFO design
-fCFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist,  
+fCFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist,
                 accrual.dist, design='fCFO', init.level, add.args)
 plot(fCFOtrial)
 fCFOsimu <- CFO.oc (nsimu, design='fCFO', phi, p.true, ncohort, init.level, cohortsize,
                       tau, accrual, tite.dist, accrual.dist, add.args)
-plot(fCFOsimu)                      
+plot(fCFOsimu)
 ## f-aCFO design
-faCFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, 
+faCFOtrial <- lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist,
                 accrual.dist, design='f-aCFO', init.level, add.args)
 plot(faCFOtrial)
 faCFOsimu <- CFO.oc (nsimu, design='f-aCFO', phi, p.true, ncohort, init.level, cohortsize,

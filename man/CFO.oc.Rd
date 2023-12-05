@@ -78,26 +78,26 @@ tau <- 3; accrual <- 6; tite.dist <- 2; accrual.dist <- 1
 
 ## get the operating characteristics for 100 simulations using the CFO design
 CFO.oc (nsimu, design='CFO', phi, p.true, ncohort, init.level, cohortsize,
-       tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args) 
+       tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args)
 ## get the operating characteristics for 100 simulations using the aCFO design
 CFO.oc (nsimu, design='aCFO', phi, p.true, ncohort, init.level, cohortsize,
        tau=NaN, accrual=NaN, tite.dist=NaN, accrual.dist=NaN, add.args)
 ## get the operating characteristics for 100 simulations using the TITE-CFO design
 CFO.oc (nsimu, design='TITE-CFO', phi, p.true, ncohort, init.level, cohortsize,
-        tau, accrual, tite.dist, accrual.dist, add.args) 
+        tau, accrual, tite.dist, accrual.dist, add.args)
 ## get the operating characteristics for 100 simulations using the TITE-aCFO design
 CFO.oc (nsimu, design='TITE-aCFO', phi, p.true, ncohort, init.level, cohortsize,
         tau, accrual, tite.dist, accrual.dist, add.args)
 ## get the operating characteristics for 100 simulations using the fCFO design
 CFO.oc (nsimu, design='fCFO', phi, p.true, ncohort, init.level, cohortsize,
-        tau, accrual, tite.dist, accrual.dist, add.args) 
+        tau, accrual, tite.dist, accrual.dist, add.args)
 ## get the operating characteristics for 100 simulations using the f-aCFO design
 CFO.oc (nsimu, design='f-aCFO', phi, p.true, ncohort, init.level, cohortsize,
         tau, accrual, tite.dist, accrual.dist, add.args)
 ## get the operating characteristics for 100 simulations using the bCFO design
 CFO.oc (nsimu, design='bCFO', phi, p.true, ncohort, init.level, cohortsize,
-        tau, accrual, tite.dist, accrual.dist, add.args) 
+        tau, accrual, tite.dist, accrual.dist, add.args)
 ## get the operating characteristics for 100 simulations using the b-aCFO design
 CFO.oc (nsimu, design='b-aCFO', phi, p.true, ncohort, init.level, cohortsize,
-        tau, accrual, tite.dist, accrual.dist, add.args) 
+        tau, accrual, tite.dist, accrual.dist, add.args)
 }

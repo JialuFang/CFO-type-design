@@ -2,7 +2,7 @@
 #' 
 #' Use this function to find the maximum tolerated dose (MTD) for a single Calibration-Free Odds (CFO) or accumulative CFO (aCFO) trial.
 #'
-#' @usage aCFO.simu(phi, p.true, ncohort, init.level=1, cohortsize=3, 
+#' @usage CFO.simu(phi, p.true, ncohort, init.level=1, cohortsize=3, 
 #'        add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE, seed=NULL)
 #'
 #' @param phi the target DLT rate.
@@ -17,7 +17,7 @@
 #'                 any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).
 #' @param seed an integer to set as the seed of the random number generator for reproducible results, the default is set to NULL.
 #'                            
-#' @details The \code{aCFO.simu()} function is designed to determine the Maximum Tolerated Dose (MTD) for a single CFO or aCFO 
+#' @details The \code{CFO.simu()} function is designed to determine the Maximum Tolerated Dose (MTD) for a single CFO or aCFO 
 #'          trial. If \code{accumulation = FALSE}, this trial corresponds to the CFO design. If \code{accumulation = TRUE}, it
 #'          corresponds to the aCFO design. \cr
 #'          Given the toxicity outcomes from previous cohorts, each cohort is sequentially assigned to the most suitable dose 
@@ -26,14 +26,18 @@
 #'          exhibits excessive toxicity (\eqn{\Pr(p_C > \phi|x_C, m_C \geq 3) > 0.95}), we exclude the current dose level as 
 #'          well as higher dose levels from the trial. Upon the predefined maximum sample size is reached or the lowest dose 
 #'          level is overly toxicity, the experiment is concluded, and the MTD is determined using isotonic regression.
-#' 
 #'
-#' @return The \code{aCFO.simu} function returns a list object comprising the following components: the target DLT 
-#'         rate ($target), the actual DLT rates under different dose levels ($p.true), the selected MTD ($MTD), 
-#'         the list that includes the dose level assigned to each cohort($dose.list), the total number of DLTs and 
-#'         patients for all dose levels ($DLT.ns and $dose.ns), and the over-toxicity status for all dose levels 
-#'         ($over.doses). Specifically, the value of 1 represents over-toxicity at that dose level, while the value 
-#'         of 0 indicates safety at that dose level.
+#' @return The \code{CFO.simu} function returns a list object comprising the following components: 
+#'         \itemize{
+#'         \item{target: }{the target DLT rate.}
+#'         \item{p.true: }{the actual DLT rates under different dose levels.}
+#'         \item{MTD: }{the selected MTD.}
+#'         \item{dose.list: }{the list that includes the dose level assigned to each cohort.}
+#'         \item{DLT.ns: }{the total number of DLTs for all dose levels.}
+#'         \item{dose.ns: }{the total number of patients for all dose levels}
+#'         \item{tover.doses: }{the over-toxicity status for all dose levels (1 for yes).}
+#'         \item{DLT.list: }{The DLT outcome observed at each subject.}
+#'         }
 #' 
 #' @author Jialu Fang
 #' 
@@ -44,14 +48,14 @@
 #' phi <- 0.2; ncohort <- 12; cohortsize <- 3
 #' p.true <-c(0.01, 0.05, 0.10, 0.14, 0.20, 0.26, 0.34)
 #' ## find the MTD for a single CFO trial
-#' aCFO.simu(phi, p.true, ncohort, init.level=1, cohortsize=3,
+#' CFO.simu(phi, p.true, ncohort, init.level=1, cohortsize=3,
 #'          add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE)
 #' ## find the MTD for a single aCFO trial
-#' aCFO.simu(phi, p.true, ncohort, init.level=1, cohortsize=3,
+#' CFO.simu(phi, p.true, ncohort, init.level=1, cohortsize=3,
 #'          add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = TRUE)
 #' @import BOIN
 #' @export
-aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
+CFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
                       add.args=list(alp.prior=phi, bet.prior=1-phi), accumulation = FALSE, seed=NULL){
   ###############################################################################
   ###############define the functions used for main function#####################
@@ -88,6 +92,7 @@ aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
   tys <- rep(0, ndose) # number of responses for different doses.
   tns <- rep(0, ndose) # number of subject for different doses.
   tover.doses <- rep(0, ndose) # Whether each dose is overdosed or not, 1 yes
+  DLTlist <- c()
   
   for (i in 1:ncohort){
     pc <- p.true[curDose]
@@ -95,6 +100,7 @@ aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
     
     # sample from current dose
     cres <- rbinom(cohortsize, 1, pc)
+    DLTlist <- c(DLTlist, cres)
     
     # update results
     tys[curDose] <- tys[curDose] + sum(cres)
@@ -140,7 +146,7 @@ aCFO.simu <- function(phi, p.true, ncohort, init.level=1, cohortsize=3,
     MTD <- 99
   }
   out<-list(target=phi, p.true=p.true, MTD=MTD, dose.list=doselist, dose.ns=tns,
-            DLT.ns=tys, tover.doses=tover.doses)
+            DLT.ns=tys, tover.doses=tover.doses, DLT.list=DLTlist)
   class(out) <- "cfo"
   return(out)
 }

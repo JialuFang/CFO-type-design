@@ -9,9 +9,9 @@
 #' @param phi the target DLT rate
 #' @param cys the current number of DLTs observed in patients for the left, current, and right dose levels.
 #' @param cns the current number of patients for the left, current, and right dose levels.
-#' @param alp.prior,bet.prior the parameters of the prior distribution for the true DLT rate at any dose level.
-#'                            This prior distribution is set to Beta( \code{alpha.prior}, \code{beta.prior}). 
-#'                            The default value is \code{phi} and \code{1-phi}.
+#' @param add.args additional parameters, usually set as list(alp.prior=phi, bet.prior=1-phi) by default. \code{alp.prior} 
+#'                 and \code{bet.prior} represent the parameters of the prior distribution for the true DLT rate at 
+#'                 any dose level. This prior distribution is specified as Beta( \code{alpha.prior}, \code{beta.prior}).
 #' @param curDose the current dose level.
 #' @param cover.doses whether the dose level (left, current and right) is over-toxic or not. 
 #'                    The value is set as 1 if the dose level is overly toxicity; otherwise, it is set to 0.

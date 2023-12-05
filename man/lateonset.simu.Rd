@@ -41,10 +41,20 @@ any dose level. This prior distribution is specified as Beta( \code{alpha.prior}
 \item{seed}{an integer to set as the seed of the random number generator for reproducible results, the default is set to NULL.}
 }
 \value{
-The \code{lateonset.simu()} function returns a list object comprising the following components: the target DLT
-rate ($target), the actual DLT rates under different dose levels ($p.true), the selected MTD ($MTD),
-the list that includes the dose level assigned to each cohort($dose.list), the total number of DLTs and
-patients for all dose levels ($DLT.ns and $dose.ns), and the duration of the trial in months ($total.time).
+The \code{lateonset.simu()} function returns a list object comprising the following components:
+\itemize{
+\item{MTD: }{the selected MTD.}
+\item{dose.list: }{the list that includes the dose level assigned to each cohort.}
+\item{dose.ns: }{the total number of patients for all dose levels.}
+\item{DLT.ns: }{the total number of patients for all dose levels}
+\item{p.true: }{the actual DLT rates under different dose levels.}
+\item{target: }{the target DLT rate.}
+\item{total.time: }{the duration of the trial in months.}
+\item{DLT.list: }{the DLT outcome observed at each subject.}
+\item{enter.times: }{the time at which each subject existing in the trial enters the trial.}
+\item{DLT.times: }{the time to DLT for each subject existing in the trial.  If no DLT occurs for a certain subject,
+\code{DLT.times} is 0.}
+}
 }
 \description{
 Use this function to find the maximum tolerated dose (MTD) for the CFO-type and aCFO-type designs with late-onset toxicities,
@@ -62,25 +72,8 @@ applications, multiple simulations are required to ascertain the MTD, and this c
 \examples{
 phi <- 0.2; ncohort <- 12; cohortsize <- 3
 p.true <-c(0.01, 0.05, 0.10, 0.14, 0.20, 0.26, 0.34)
- tau <- 3; accrual <- 6; tite.dist <- 2; accrual.dist <- 1
+tau <- 3; accrual <- 6; tite.dist <- 2; accrual.dist <- 1
 ## find the MTD for a single TITE-CFO trial
-lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-                design='TITE-CFO', init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
-## find the MTD for a single TITE-aCFO trial
-lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-                design='TITE-aCFO', init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
-## find the MTD for a single fCFO trial
-lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-                design='fCFO', init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
-## find the MTD for a single f-aCFO trial
-lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-                design='f-aCFO', init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
-## find the MTD for a single benchmark CFO trial
-lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-                design='bCFO', init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
-## find the MTD for a single benchmark aCFO trial
-lateonset.simu (phi, p.true, tau, cohortsize, ncohort, accrual, tite.dist, accrual.dist, 
-                design='b-aCFO', init.dose=1, add.args=list(alp.prior=phi, bet.prior=1-phi))
 }
 \references{
 Jin, H., & Yin, G. (2022). CFO: Calibration-free odds design for phase I/II clinical trials.
